@@ -4,11 +4,11 @@ It allows designers to add more themes and make them available to the users in a
 Installation :
 
 install plugin from 
-script/plugin install git@github.com:stpl/stpl_theme
+script/plugin install git@github.com:stpl/stpl_theme.git
 
 After installation run the below command from your application direcotry
 rake stpl_theme:init
-ruby script/genrate stpl_theme_migration
+ruby script/generate stpl_theme_migration
 rake db:migrate
 
 Add this line at the top of your route file

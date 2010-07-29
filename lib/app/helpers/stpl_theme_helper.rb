@@ -4,8 +4,12 @@ module StplThemeModule
     # if object doesn't have any theme then it will apply default model theme
     # and if default model theme is not specified then it will apply plugin's default theme
     def apply_theme themed_object
-      theme = StplThemeModule::StplThemes.instance.get_theme(themed_object.current_theme.theme_id.to_i) || eval("#{themed_object.class.to_s.capitalize}.get_default_name") || StplThemeModule::StplThemes.instance.default_theme 
-      return "<link rel='stylesheet' type='text/css' href='#{theme[theme.keys.first]["css_file_path"]}' ></link>" unless theme.blank?
+      unless themed_object.blank?
+        theme = (StplThemeModule::StplThemes.instance.get_theme(themed_object.current_theme.theme_id.to_i) unless themed_object.current_theme.blank?) || eval("#{themed_object.class.to_s.capitalize}.get_default_name") || StplThemeModule::StplThemes.instance.default_theme
+        return "<link rel='stylesheet' type='text/css' href='#{theme[theme.keys.first]["css_file_path"]}' ></link>" unless theme.blank?
+      else
+        raise "Themed object not found. Please provide object to be themed."
+      end
     end
 
     # show available themes to user to select 
