@@ -1,0 +1,2 @@
+<%=javascript_include_tag "/stpl_theme/javascripts/stpl_theme" %>
+<%= select("stpl_theme","theme_id", StplThemeModule::StplThemes.instance.get_all_themes.collect {|k,v| [ v["name"],k ] }, { :include_blank => "Select theme" },:onchange=>"selected_stpl_theme('#{themed_object.class.to_s}','#{themed_object.id.to_i}')") %>

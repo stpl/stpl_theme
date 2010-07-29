@@ -1,0 +1,48 @@
+The stpl_theme plugin allows users of the application to choose there themes .
+It allows designers to add more themes and make them available to the users in a flash !
+
+Installation :
+
+install plugin from 
+script/plugin install git@github.com:stpl/stpl_theme
+
+After installation run the below command from your application direcotry
+rake stpl_theme:init
+ruby script/genrate stpl_theme_migration
+rake db:migrate
+
+Add this line at the top of your route file
+  map.resources :stpl_themes, :only => [:create]
+
+
+You are all set now !
+
+Now that you have the code in your app , add this line to the Model whom you want to enable to select their own theme
+
+Class User < ActiveRecord::Base
+  can_select_theme
+# can_select_theme :default_theme_name 
+The can_select_theme also takes a default theme name that you want to apply as default for an object of this model .
+
+To give a nice little drop down selector for the user to choose a theme add this in your views
+<%= theme_selector @user_obj %>
+
+Finally to apply the themes , add this line in the end of your layout file
+<%= apply_theme @user_obj %>
+
+Note: It uses prototype for it's ajax operation so include prototype.js in this page. You can do that easily in rails using <%=javascript_include_tag :defaults %>
+
+The plugin comes with a few cool default themes . However that does not stop you to add your own themes to it .
+To add a new theme , make a new css file and add the name of the theme and the location of the css file in config/stpl_theme.yml . Restart the server .
+Your new theme should now be visible to the user .
+
+That's it ! Theme your way to glory  :)
+
+
+Themes available:
+
+1) default
+2) advance
+
+
+Copyright (c) 2010 [STPL], released under the MIT license

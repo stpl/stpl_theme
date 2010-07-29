@@ -1,0 +1,9 @@
+1:
+  name: default
+  default: true
+  css_file_path: /stpl_theme/stylesheets/default.css
+
+2:
+  name: advance
+  default: false 
+  css_file_path: /stpl_theme/stylesheets/advance.css
